@@ -93,6 +93,7 @@ export class LogParser {
 export class MultiLineLogAggregator {
   private currentEntry: ParsedLogEntry | null = null;
   private currentLines: string[] = [];
+  private buffer: string = '';
   private parser = new LogParser();
 
   /**

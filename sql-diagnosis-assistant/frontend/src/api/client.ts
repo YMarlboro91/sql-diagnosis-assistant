@@ -36,6 +36,33 @@ export interface ExceptionStats {
   severity: string;
 }
 
+// 规则相关类型
+export interface RuleRecord {
+  id?: number;
+  name: string;
+  exceptionType: string;
+  sqlStage: string;
+  severity: 'HIGH' | 'MEDIUM' | 'LOW';
+  patterns: string[];
+  title: string;
+  suggestion: string;
+  enabled: boolean;
+  priority: number;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface SQLStageOption {
+  value: string;
+  label: string;
+  order: number;
+}
+
+export interface ExceptionTypeOption {
+  value: string;
+  label: string;
+}
+
 export interface ListResponse<T> {
   success: boolean;
   data: T[];
@@ -94,5 +121,46 @@ export const api = {
   // 健康检查
   health() {
     return client.get('/health');
+  },
+
+  // 规则管理
+  getRules() {
+    return client.get<{ success: boolean; data: RuleRecord[] }>('/rules');
+  },
+
+  getRule(id: number) {
+    return client.get<{ success: boolean; data: RuleRecord }>(`/rules/${id}`);
+  },
+
+  createRule(rule: Partial<RuleRecord>) {
+    return client.post<{ success: boolean; data: RuleRecord }>('/rules', rule);
+  },
+
+  updateRule(id: number, rule: Partial<RuleRecord>) {
+    return client.put<{ success: boolean; data: RuleRecord }>(`/rules/${id}`, rule);
+  },
+
+  deleteRule(id: number) {
+    return client.delete<{ success: boolean; message: string }>(`/rules/${id}`);
+  },
+
+  reorderRules(priorities: { id: number; priority: number }[]) {
+    return client.post<{ success: boolean; message: string }>('/rules/reorder', { priorities });
+  },
+
+  getRulesStages() {
+    return client.get<{ success: boolean; data: SQLStageOption[] }>('/rules/stages');
+  },
+
+  getRulesTypes() {
+    return client.get<{ success: boolean; data: ExceptionTypeOption[] }>('/rules/types');
+  },
+
+  exportRules() {
+    return client.get<{ success: boolean; data: RuleRecord[] }>('/rules/export');
+  },
+
+  importRules(rules: Partial<RuleRecord>[]) {
+    return client.post<{ success: boolean; data: { imported: number; errors: string[] } }>('/rules/import', { rules });
   },
 };

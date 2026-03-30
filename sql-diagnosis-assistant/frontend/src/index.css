@@ -1,3 +1,148 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8);
+  }
+}
+
+/* Apply animations to cards */
+.ant-card {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Hover effects for exception cards */
+.exception-card {
+  transition: all 0.3s ease;
+}
+
+.exception-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* SQL stage node animations */
+.stage-node {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stage-node:hover {
+  transform: scale(1.08);
+}
+
+/* Severity badge glow effects */
+.severity-high {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Log viewer styles */
+.log-viewer {
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  line-height: 1.6;
+}
+
+.log-line {
+  transition: background-color 0.2s ease;
+}
+
+.log-line:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Ant Design overrides */
+.ant-steps-item-finish .ant-steps-item-icon {
+  background-color: #52c41a !important;
+  border-color: #52c41a !important;
+}
+
+.ant-steps-item-process .ant-steps-item-icon {
+  background-color: #f5222d !important;
+  border-color: #f5222d !important;
+}
+
+.ant-table-thead > tr > th {
+  background: #f8fafc !important;
+  font-weight: 600 !important;
+}
+
+.ant-menu-dark {
+  background: transparent !important;
+}
+
+.ant-menu-dark .ant-menu-item-selected {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Gradient backgrounds */
+.gradient-header {
+  background: linear-gradient(135deg, #1890ff 0%, #722ed1 100%);
+}
+
+.gradient-card {
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+}
+
+/* Diagnosis severity colors */
+.diagnosis-high {
+  border-left: 4px solid #f5222d;
+}
+
+.diagnosis-medium {
+  border-left: 4px solid #fa8c16;
+}
+
+.diagnosis-low {
+  border-left: 4px solid #1890ff;
+}
+
+.diagnosis-info {
+  border-left: 4px solid #52c41a;
+}

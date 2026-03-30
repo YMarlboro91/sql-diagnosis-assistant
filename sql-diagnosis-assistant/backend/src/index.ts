@@ -3,6 +3,7 @@ import cors from '@fastify/cors';
 import { mkdirSync, existsSync } from 'fs';
 import { DatabaseManager } from './db/sqlite.js';
 import { setupRoutes } from './api/routes.js';
+import { setupRulesRoutes } from './api/rules.js';
 import { WatchConfig, FileWatcher } from './watcher/FileWatcher.js';
 import { ExceptionDetector } from './detector/ExceptionDetector.js';
 import { LogAssociator } from './associator/LogAssociator.js';
@@ -17,7 +18,8 @@ const CONFIG: WatchConfig = {
       name: 'quark-server',
       type: 'server',
       logPath: '/home/yoking/sql-diagnosis-assistant/logexample',
-      filePattern: 'quark-server.log'
+      filePattern: 'quark-server.log',
+      logType: 'sql'
     }
   ]
 };
@@ -38,6 +40,7 @@ async function main() {
 
   // 设置路由
   await setupRoutes(fastify, db);
+  await setupRulesRoutes(fastify, db);
 
   // 初始化文件监控
   const watcher = new FileWatcher(CONFIG, db.db);

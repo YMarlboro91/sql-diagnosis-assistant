@@ -1,5 +1,5 @@
 import { SQLLogEntry, ExceptionRecord, SQLStage } from '../parser/LogEntry.js';
-import { matchExceptionType, DetectionRule } from './rules.js';
+import { matchExceptionType, DetectionRule, DETECTION_RULES } from './rules.js';
 
 /**
  * 异常检测器
