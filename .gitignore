@@ -1,0 +1,34 @@
+# Sensitive files
+.*
+!.gitignore
+!.bashrc
+!.profile
+!.bash_logout
+
+# Shell history
+.bash_history
+.node_repl_history
+
+# SSH
+.ssh/
+
+# Cache and temp
+.cache/
+.cache*/**
+
+# Credentials and secrets
+.sudo_as_admin_successful
+.npmrc
+.Xauthority
+
+# Large/clutter directories
+.npm/
+.npm-global/
+.node_repl_history
+.nvm/
+.local/
+.codex/
+.claude/
+.openclaw/
+.landscape/
+.chelper/
